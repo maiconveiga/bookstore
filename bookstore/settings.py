@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +25,6 @@ SECRET_KEY = "django-insecure-f*k@=53bc5!shef1-6w+m$-g)kspbaljz%8k4(j7iuc-u2_dyd
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-if 'test' in sys.argv:
-    DEBUG = False
-
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'ebac-bookstore-api.herokuapp.com', 'drsantos20.pythonanywhere.com']
 
@@ -52,16 +47,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # "django.middleware.security.SecurityMiddleware",
-    # "django.contrib.sessions.middleware.SessionMiddleware",
-    # "django.middleware.common.CommonMiddleware",
-    # "django.middleware.csrf.CsrfViewMiddleware",
-    # "django.contrib.auth.middleware.AuthenticationMiddleware",
-    # "django.contrib.messages.middleware.MessageMiddleware",
-    # "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
-    # "whitenoise.middleware.WhiteNoiseMiddleware",
-    # "rest_framework.authtoken",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -72,16 +57,6 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
-DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
-}
-
-if 'test' in sys.argv:
-    DEBUG = False
-    # Remova debug_toolbar das apps instaladas
-    INSTALLED_APPS = [app for app in INSTALLED_APPS if app != 'debug_toolbar']
-    # Remova DebugToolbarMiddleware do middleware
-    MIDDLEWARE = [mw for mw in MIDDLEWARE if mw != 'debug_toolbar.middleware.DebugToolbarMiddleware']
 
 ROOT_URLCONF = "bookstore.urls"
 
@@ -109,11 +84,11 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "bookstore_dev_db"),
+        "USER": os.environ.get("SQL_USER", "bookstore_dev"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "bookstore_dev"),
+        "HOST": os.environ.get("SQL_HOST", "db"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
@@ -154,20 +129,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATIC_URL = "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 5,
-
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
