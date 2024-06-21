@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.1'
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
