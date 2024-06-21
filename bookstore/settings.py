@@ -84,19 +84,15 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "bookstore_dev_db"),
+        # "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
+        # "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "bookstore_dev_db"),
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "sqlite3"),
         "USER": os.environ.get("SQL_USER", "bookstore_dev"),
         "PASSWORD": os.environ.get("SQL_PASSWORD", "bookstore_dev"),
-        "HOST": os.environ.get("SQL_HOST", "db"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        # "HOST": os.environ.get("SQL_HOST", "db"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
-
-        # "ENGINE": "django.db.backends.postgresql",
-        # "NAME":str(BASE_DIR / "bookstore_dev_db"),
-        # "USER":"bookstore_dev",
-        # "PASSWORD": "bookstore_dev",
-        # "HOST": "db",
-        # "PORT": "5432",
     }
 }
 
@@ -122,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America\Sao_Paulo"
 
 USE_I18N = True
 
