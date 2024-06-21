@@ -84,19 +84,19 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        # "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        # "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "bookstore_dev_db"),
-        # "USER": os.environ.get("SQL_USER", "bookstore_dev"),
-        # "PASSWORD": os.environ.get("SQL_PASSWORD", "bookstore_dev"),
-        # "HOST": os.environ.get("SQL_HOST", "db"),
-        # "PORT": os.environ.get("SQL_PORT", "5432"),
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "bookstore_dev_db"),
+        "USER": os.environ.get("SQL_USER", "bookstore_dev"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "bookstore_dev"),
+        "HOST": os.environ.get("SQL_HOST", "db"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
 
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME":BASE_DIR / "bookstore_dev_db",
-        "USER":"bookstore_dev",
-        "PASSWORD": "bookstore_dev",
-        "HOST": "db",
-        "PORT": "5432",
+        # "ENGINE": "django.db.backends.postgresql",
+        # "NAME":str(BASE_DIR / "bookstore_dev_db"),
+        # "USER":"bookstore_dev",
+        # "PASSWORD": "bookstore_dev",
+        # "HOST": "db",
+        # "PORT": "5432",
     }
 }
 
